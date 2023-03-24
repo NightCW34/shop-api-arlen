@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  # Servicio de la base de datos PostgreSQL
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - '${DB_PORT}:${DB_PORT}'
+
+  # Servicio de pgAdmin
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_LISTEN_ADDRESS: 0.0.0.0
+    ports:
+      - '${PGADMIN_PORT}:${PGADMIN_PORT}'
